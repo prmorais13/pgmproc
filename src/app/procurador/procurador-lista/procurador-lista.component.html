@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <section>
+        <header class="header">
+          <div class="row">
+            <div class="col-md-4">
+              <h1>Procuradores</h1>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-primary" (click)="criarProcurador()">Novo</button>
+            </div>
+          </div>
+        </header>
+      </section>
+
+      <section class="main">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Procuradoria</th>
+              <th>Celular</th>
+              <th>Email</th>
+              <th>Data Cadastro</th>
+              <th>Data Atualização</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let procurador of procuradores">
+              <th scope="row">{{procurador.id}}</th>
+              <td>{{procurador.nome}}</td>
+              <td>{{procurador.procuradoria}}</td>
+              <td>{{procurador.celular}}</td>
+              <td>{{procurador.email}}</td>
+              <td>{{procurador.dataCadastro}}</td>
+              <td>{{procurador.dataAtualizacao}}</td>
+              <td>
+                <button type="button" class="btn btn-success" (click)="editar(procurador)">Editar</button>
+                <button type="button" class="btn btn-danger" (click)="excluir(procurador)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</div>
