@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { Procurador } from './procurador';
 
@@ -9,9 +11,12 @@ export class ProcuradorService {
 
   private apiUrl = 'http://localhost:8080/procuradores';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
-  buscarTodos() {
-    return this.http.get<any []>(this.apiUrl);
+  buscarTodos(): Observable<Procurador[]> {
+    // return this.http.get<any []>(this.apiUrl);
+    return this.http.get(this.apiUrl)
+      .map(r => r.json())
+      .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
   }
 }

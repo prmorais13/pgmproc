@@ -24,9 +24,11 @@ export class ProcuradorListaComponent implements OnInit {
 
   getTodosProcuradores() {
     this.procuradorService.buscarTodos()
-      .subscribe(dados => {
-        this.procuradores = dados;
-      });
+      .subscribe(
+        dados => this.procuradores = dados,
+        er => console.log(er),
+        () => console.log(this.procuradores)
+      );
   }
 
   criarProcurador() {
