@@ -26,6 +26,12 @@ export class ProcuradorService {
     .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
   }
 
+  atualizar(procurador: Procurador): Observable<Procurador> {
+    return this.http.put(this.apiUrl, procurador)
+    .map(r => r.json())
+    .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  }
+
   porId(id: number): Observable<Procurador> {
     return this.http.get(`${this.apiUrl}/${id}`)
     .map(r => r.json())

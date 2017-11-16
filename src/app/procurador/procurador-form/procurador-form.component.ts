@@ -38,10 +38,12 @@ export class ProcuradorFormComponent implements OnInit {
           procurador => {
             this.id = procurador.id;
             this.procForm.patchValue({
+              id: procurador.id,
               nome: procurador.nome,
               procuradoria: procurador.procuradoria,
               email: procurador.email,
-              celular: procurador.celular
+              celular: procurador.celular,
+              dataCriacao: procurador.dataCriacao
             });
           }, erro => console.log(erro)
         );
@@ -60,24 +62,36 @@ export class ProcuradorFormComponent implements OnInit {
     });*/
 
     this.procForm = this.fb.group({
+      id: [this.id],
       nome: ['', Validators.required],
       procuradoria: ['', Validators.required],
       email: ['', Validators.compose([
         Validators.required,
         Validators.email
       ])],
-      celular: ''
+      celular: '',
+      dataCriacao: ''
     });
   }
 
   aoSalvar() {
     if (this.procForm.valid) {
-      this.procuradorService.salvar(this.procForm.value)
-        .subscribe(
-          r => console.log(r),
-          erro => console.log(erro),
-          () => console.log('Concluído')
-        );
+      if (!this.id) {
+        this.procuradorService.salvar(this.procForm.value)
+            .subscribe(
+              r => console.log(r),
+              erro => console.log(erro),
+              () => console.log('Inserido com sucesso!')
+            );
+        } else {
+          this.procuradorService.atualizar(this.procForm.value)
+            .subscribe(
+              r => console.log(r),
+              erro => console.log(erro),
+              () => console.log('Alterado com sucesso!')
+            );
+        }
+    }
       /*const procurador: Procurador = new Procurador(null,
         this.procForm.controls['nome'].value,
         this.procForm.controls['procuradoria'].value,
@@ -85,10 +99,19 @@ export class ProcuradorFormComponent implements OnInit {
         this.procForm.controls['celular'].value);
         this.procuradorService.salvar(procurador)
           .subscribe();*/
-    }
     this.procForm.reset();
     this.router.navigate(['/procuradores']);
   }
+
+  /*atualizarProcurador(procurador: Procurador) {
+    if (!procurador) { return; }
+    this.procuradorService.atualizar(procurador)
+      .subscribe(
+        r => console.log(r),
+        erro => console.log(erro),
+        () => console.log('Alterado com sucesso!')
+      );
+  }*/
 
   procuradorPage() {
     this.router.navigate(['/procuradores']);

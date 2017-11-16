@@ -37,7 +37,7 @@ export class ProcuradorListaComponent implements OnInit {
 
   editar(procurador: Procurador) {
     if (procurador) {
-      this.router.navigate(['/procuradores/editar/', procurador.id]);
+      this.router.navigate(['/procuradores/editar', procurador.id]);
     }
   }
 

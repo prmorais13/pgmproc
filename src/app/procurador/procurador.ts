@@ -4,6 +4,7 @@ export class Procurador {
     procuradoria: string;
     email: string;
     celular: string;
+    dataCriacao: Date;
 
     constructor(id: number, nome: string, procuradoria: string,
         email: string, celular: string) {
