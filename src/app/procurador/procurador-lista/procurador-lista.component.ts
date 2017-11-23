@@ -41,9 +41,17 @@ export class ProcuradorListaComponent implements OnInit {
     }
   }
 
-  excluir(procurador: Procurador) {
+  excluirProcurador(procurador: Procurador) {
     if (procurador) {
-      console.log('Excluir procurador ' + procurador.id);
+      this.procuradorService.excluir(procurador.id)
+        .subscribe(
+          rs => console.log(rs),
+          // erro => console.log(erro),
+          () => {
+            this.getTodosProcuradores();
+            this.router.navigate(['/procuradores']);
+          }
+        );
     }
   }
 }

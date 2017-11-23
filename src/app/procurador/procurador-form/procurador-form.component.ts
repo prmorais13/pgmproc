@@ -22,9 +22,9 @@ export class ProcuradorFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private fb: FormBuilder,
-    private procuradorService: ProcuradorService
+    private procuradorService: ProcuradorService,
+    private router: Router
   ) {
     this.criarControles();
   }
@@ -79,18 +79,20 @@ export class ProcuradorFormComponent implements OnInit {
       if (!this.id) {
         this.procuradorService.salvar(this.procForm.value)
             .subscribe(
-              r => console.log(r),
-              erro => console.log(erro),
+              // r => console.log(r),
+              // erro => console.log(erro),
               () => console.log('Inserido com sucesso!')
             );
         } else {
           this.procuradorService.atualizar(this.procForm.value)
             .subscribe(
-              r => console.log(r),
-              erro => console.log(erro),
-              () => console.log('Alterado com sucesso!')
+              // r => console.log(r),
+              // erro => console.log(erro),
+              () => console.log('Alterado com sucesso!'),
             );
         }
+        this.procForm.reset();
+        this.procuradorPage();
     }
       /*const procurador: Procurador = new Procurador(null,
         this.procForm.controls['nome'].value,
@@ -99,8 +101,6 @@ export class ProcuradorFormComponent implements OnInit {
         this.procForm.controls['celular'].value);
         this.procuradorService.salvar(procurador)
           .subscribe();*/
-    this.procForm.reset();
-    this.router.navigate(['/procuradores']);
   }
 
   /*atualizarProcurador(procurador: Procurador) {

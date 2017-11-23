@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { ProcuradorModule } from './procurador/procurador.module';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     AppRoutingModule,
     ProcuradorModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

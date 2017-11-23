@@ -5,36 +5,40 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Procurador } from './procurador';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProcuradorService {
 
   private apiUrl = 'http://localhost:8080/procuradores';
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private httpClient: HttpClient
+  ) { }
 
-  buscarTodos(): Observable<Procurador[]> {
-    // return this.http.get<any []>(this.apiUrl);
-    return this.http.get(this.apiUrl)
-      .map(r => r.json())
-      .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  buscarTodos() {
+    return this.httpClient.get<Procurador[]>(this.apiUrl);
+      // .catch((erro: any) => Observable.throw(erro.error || 'Erro no Servidor'));
   }
 
-  salvar(procurador: Procurador): Observable<Procurador> {
-    return this.http.post(this.apiUrl, procurador)
-    .map(r => r.json())
-    .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  salvar(procurador: Procurador) {
+    return this.httpClient.post<Procurador>(this.apiUrl, procurador);
+    // .catch((erro: any) => Observable.throw(erro.error || 'Erro no Servidor'));
   }
 
-  atualizar(procurador: Procurador): Observable<Procurador> {
-    return this.http.put(this.apiUrl, procurador)
-    .map(r => r.json())
-    .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  atualizar(procurador: Procurador) {
+    return this.httpClient.put<Procurador>(this.apiUrl, procurador);
+    // .catch((erro: any) => Observable.throw(erro.error || 'Erro no Servidor'));
   }
 
-  porId(id: number): Observable<Procurador> {
-    return this.http.get(`${this.apiUrl}/${id}`)
-    .map(r => r.json())
-    .catch((erro: any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  excluir(id: number) {
+    return this.httpClient.delete<boolean>(`${this.apiUrl}/${id}`);
+     // .catch((erro: any) => Observable.throw(erro.error || 'Erro no Servidor'));
+  }
+
+  porId(id: number) {
+    return this.httpClient.get<Procurador>(`${this.apiUrl}/${id}`);
+      // .catch((erro: any) => Observable.throw(erro.error || 'Erro no Servidor'));
   }
 }

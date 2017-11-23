@@ -11,7 +11,7 @@
 
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-primary" (click)="criarProcurador()">Novo</button>
+              <button type="button" class="btn btn-sm btn-primary" (click)="criarProcurador()">Novo</button>
             </div>
           </div>
         </header>
@@ -41,8 +41,8 @@
               <td>{{procurador.dataCriacao}}</td>
               <td>{{procurador.dataAtualizacao}}</td>
               <td>
-                <button type="button" class="btn btn-success" (click)="editar(procurador)">Editar</button>
-                <button type="button" class="btn btn-danger" (click)="excluir(procurador)">Excluir</button>
+                <button type="button" class="btn btn-sm btn-success" (click)="editar(procurador)">Editar</button>
+                <button type="button" class="btn btn-sm btn-danger" (click)="excluirProcurador(procurador)">Excluir</button>
               </td>
             </tr>
           </tbody>
